@@ -1,0 +1,36 @@
+<body>
+    <header>
+      <h1 class="headline"> 施設・コート一覧 </h1>
+    </header>
+    <nav>
+      <ul class="nav-list">
+        <li class="nav-list-item">
+          <%= link_to "Top", root_path %>
+        </li>
+        <li class="nav-list-item">
+          <%= link_to "施設・コート一覧", post_images_path %>
+        </li>
+        <li class="nav-list-item">
+          <%= link_to "施設・コート登録", new_post_image_path %>
+        </li>
+      </ul>
+    </nav>
+    <main>      
+    <%= yield %>
+    </main>
+  </body>
+
+<%= render 'list', post_images: @post_images %>
+
+<% @post_images.each do |post_image| %>
+<div>
+  <%= link_to post_image_path(post_image.id) do %>
+  <%= image_tag post_image.get_image %>
+  <% end %>
+  <%= image_tag post_image.get_image %>
+  <p>投稿ユーザー画像：<%= image_tag 'sample-author1.jpg' %></p>
+  <p>ショップ名：<%= post_image.shop_name %></p>
+  <p>説明：<%= post_image.caption %></p>
+  <p>ユーザーネーム：<%= post_image.user.name %></p>
+</div>
+<% end %>

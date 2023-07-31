@@ -1,0 +1,44 @@
+<html>
+<body>
+    <header>
+      <h1 class="headline"> 募集情報一覧 </h1>
+    </header>
+    <nav>
+      <ul class="nav-list">
+        <li class="nav-list-item">
+          <%= link_to "Top", root_path %>
+        </li>
+        <li class="nav-list-item">
+          <%= link_to "募集一覧", lists_path %>
+        </li>
+        <li class="nav-list-item">
+          <%= link_to "新規募集", new_list_path %>
+        </li>
+      </ul>
+    </nav>
+    <main>      
+    <%= yield %>
+    </main>
+  </body>
+
+<div class="list-wrap">
+<% @lists.each do |list| %>
+  <div class="list-box">
+    <% if list.image.attached? %>
+      <%= image_tag list.image, size: "200x200" %>
+    <% else %>
+      <%= image_tag 'no_image', size: "200x200" %>
+    <% end %>
+    <div class="list-comment">
+      <span class="list-body"><%= list.body %></span>
+      <span class="list-title"><%=link_to list.title, list_path(list.id) %></span>
+    </div>
+  </div>
+<% end %>
+</div>
+
+<%= link_to '新規募集情報', new_list_path, class: "btn btn-primary" %>
+
+</div>
+
+</html>
